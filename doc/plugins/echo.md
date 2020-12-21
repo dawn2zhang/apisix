@@ -26,12 +26,13 @@
 - [**Test Plugin**](#test-plugin)
 - [**Disable Plugin**](#disable-plugin)
 
-
 ## Name
 
 `echo` is a a useful plugin to help users understand as fully as possible how to develop an APISIX plugin.
 
 This plugin addresses the corresponding functionality in the common phases such as init, rewrite, access, balancer, header filer, body filter and log.
+
+**NOTE: `echo` plugin is written as an example. There are some unhandled cases and you should not use it in the production!**
 
 ## Attributes
 
