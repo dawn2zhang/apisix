@@ -511,6 +511,25 @@ function _M.get(name)
 end
 
 
+function _M.get_all(attrs)
+    local plugins = {}
+
+    if local_plugins_hash then
+        for name, plugin_obj in pairs(local_plugins_hash) do
+            plugins[name] = core.table.pick(plugin_obj, attrs)
+        end
+    end
+
+    if stream_local_plugins_hash then
+        for name, plugin_obj in pairs(stream_local_plugins_hash) do
+            plugins[name] = core.table.pick(plugin_obj, attrs)
+        end
+    end
+
+    return plugins
+end
+
+
 local function check_schema(plugins_conf, schema_type, skip_disabled_plugin)
     for name, plugin_conf in pairs(plugins_conf) do
         core.log.info("check plugin schema, name: ", name, ", configurations: ",
@@ -591,9 +610,9 @@ end
 _M.stream_check_schema = stream_check_schema
 
 
-function _M.plugin_checker(item)
+function _M.plugin_checker(item, schema_type)
     if item.plugins then
-        return check_schema(item.plugins, nil, true)
+        return check_schema(item.plugins, schema_type, true)
     end
 
     return true
